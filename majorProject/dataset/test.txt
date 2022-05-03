@@ -1,0 +1,4 @@
+Java 2Dimensional Boolean Array Values,"<p>I'm having a problem with my 2 dimensional boolean array. (or it may be with the logic of printing out the values). I set all of the values in the array to false in the beginning, and then later i print out the values to the screen. When i print them out, they all come up as true. </p>
+How to check if an uploaded file is an image without mime type?,"<p>I'd like to check if an uploaded file is an image file (e.g png, jpg, jpeg, gif, bmp) or another file. The problem is that I'm using Uploadify to upload the files, which changes the mime type and gives a 'text/octal' or something as the mime type, no matter which php file type you upload
+Seems android in some way preloads layouts and such problems occurs sometimes. But if I kill my process and start app I always see this black screen.
+
