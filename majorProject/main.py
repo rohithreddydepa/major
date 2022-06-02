@@ -1,18 +1,18 @@
+import pickle
+
 import numpy as np
 import pandas as pd
 
 from sklearn.feature_extraction.text import CountVectorizer
 from nltk.corpus import stopwords
 from sklearn.model_selection import train_test_split
-from sklearn.svm import LinearSVC
-#suport vector classifier
-from sklearn.multiclass import OneVsRestClassifier
 from sklearn.metrics import precision_score, hamming_loss
 from sklearn.metrics import recall_score
 from sklearn.metrics import f1_score
 from sklearn.metrics import accuracy_score
 import matplotlib.pyplot as plt
 import re
+
 from flask import Flask, render_template, request
 
 global filename
@@ -79,7 +79,6 @@ def titleModule():
             if len(word) > 2 and word not in stop_words:
                 msg += word + " "
         texts = msg.strip()
-        #print(texts)
         tag_arr = tags.split(' ')
         class_label = np.zeros(5)
         option = 0
@@ -97,15 +96,14 @@ def titleModule():
 
     cv = CountVectorizer(analyzer='word', stop_words=stop_words, lowercase=True, ngram_range=(1, 2))
     X = cv.fit_transform(X).toarray()
-    #print('hello', X)
+
     X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, random_state=0)
 
-    cls = OneVsRestClassifier(LinearSVC())
-    cls.fit(X_train, y_train)
+    filename = 'Title_model.sav'
+    cls = pickle.load(open(filename, 'rb'))
 
     y_pred = cls.predict(X_test)
-    #print(X_test)
-    #print(y_pred)
+
     title_precision = precision_score(y_test, y_pred, average='micro') * 100
     title_recall = recall_score(y_test, y_pred, average='micro') * 100
     title_f1 = f1_score(y_test, y_pred, average='micro') * 100
@@ -160,9 +158,8 @@ def bodyModule():
 
     X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, random_state=0)
 
-    cls = OneVsRestClassifier(LinearSVC())
-    cls.fit(X_train, y_train)
-    # prediction_data = prediction(X_test, cls)
+    filename = 'Body_model.sav'
+    cls = pickle.load(open(filename, 'rb'))
     y_pred = cls.predict(X_test)
 
     body_precision = precision_score(y_test, y_pred, average='micro') * 100
@@ -219,8 +216,8 @@ def bodyAndTitleModule():
 
     X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, random_state=0)
 
-    cls = OneVsRestClassifier(LinearSVC())
-    cls.fit(X_train, y_train)
+    filename = 'BodyandTitle_model.sav'
+    cls = pickle.load(open(filename, 'rb'))
     y_pred = cls.predict(X_test)
 
     hand_precision = precision_score(y_test, y_pred, average='micro') * 100
@@ -237,6 +234,7 @@ def recallGraph():
     y_pos = np.arange(len(bars))
     plt.bar(y_pos, height)
     plt.xticks(y_pos, bars)
+    plt.title("Recall graph", loc='center')
     plt.show()
     return render_template("Userpage.html")
 
@@ -247,6 +245,7 @@ def FGraph():
     y_pos = np.arange(len(bars))
     plt.bar(y_pos, height)
     plt.xticks(y_pos, bars)
+    plt.title("Fgraph", loc='center')
     plt.show()
     return render_template("Userpage.html")
 
@@ -257,17 +256,15 @@ def precisionGraph():
     y_pos = np.arange(len(bars))
     plt.bar(y_pos, height)
     plt.xticks(y_pos, bars)
+    plt.title("Precision", loc='center')
     plt.show()
     return render_template("Userpage.html")
 
 @app.route("/predict",methods=["GET","POST"])
 def predict():
             finaltags=[]
-    #filename = request.form["myfile"]
-    #with open(filename, "r") as file: #reading emotion word
-    #    for line in file:
-    #        print(line,end=" ")
             line=request.form["titlebody"]
+            print(line);
             line = line.strip('\n')
             line = line.strip()
             temp = line

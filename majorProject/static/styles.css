@@ -4,4 +4,7 @@ body {
 .fontLora {
     font-family: "Lora", serif;
 }
+.btn{
 
+    border-radius: 30px;
+}
