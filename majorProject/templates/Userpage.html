@@ -25,44 +25,77 @@
     />
     <!-- own files -->
     <!--<link rel="stylesheet" href="D:/SocialDistance/templates/styles.css" />-->
-     <link  href="{{ url_for('static',filename ='/styles.css') }}"  rel="stylesheet">
-
+    <link
+      href="{{ url_for('static',filename ='/styles.css') }}"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <h1 class="text-center fontLora">Tag Prediction Of Stack Overflow Question Using NLP and ML</h1>
-    <br/><br />
+    <h1 class="text-center fontLora">
+      Tag Prediction Of Stack Overflow Question Using NLP and ML
+    </h1>
+    <br /><br />
     <div class="container">
       <form method="post" class="text-center">
         <h3 class="text-center">Click to train and test the model based on:</h3>
-      <div class="row">
-          <input type="submit" value="Title" class="btn btn-lg btn-outline-dark col-md-4" formaction="{{ url_for('titleModule') }}">
-          <input type="submit" value="Body" class="btn btn-lg btn-outline-dark col-md-4"  formaction="{{ url_for('bodyModule') }}"/>
-          <input type="submit" value="Body and Title" class="btn btn-lg btn-outline-dark col-md-4"  formaction="{{ url_for('bodyAndTitleModule') }}"/>
-      </div>
-        <br>
+        <div class="row">
+          <input
+            type="submit"
+            value="Title"
+            class="btn btn-lg btn-outline-dark col-md-4"
+            formaction="{{ url_for('titleModule') }}"
+          />
+          <input
+            type="submit"
+            value="Body"
+            class="btn btn-lg btn-outline-dark col-md-4"
+            formaction="{{ url_for('bodyModule') }}"
+          />
+          <input
+            type="submit"
+            value="Body and Title"
+            class="btn btn-lg btn-outline-dark col-md-4"
+            formaction="{{ url_for('bodyAndTitleModule') }}"
+          />
+        </div>
+        <br />
         <h3 class="text-center">Click for graphs comparison:</h3>
         <div class="row">
-          <input type="submit" value="Recall" class="btn btn-lg btn-outline-dark col-md-4" formaction="{{ url_for('recallGraph') }}">
-          <input type="submit" value="Fgraphs" class="btn btn-lg btn-outline-dark col-md-4" formaction="{{ url_for('FGraph') }}">
-          <input type="submit" value="Precision" class="btn btn-lg btn-outline-dark col-md-4" formaction="{{ url_for('precisionGraph') }}">
+          <input
+            type="submit"
+            value="Recall"
+            class="btn btn-lg btn-outline-dark col-md-4"
+            formaction="{{ url_for('recallGraph') }}"
+          />
+          <input
+            type="submit"
+            value="Fgraphs"
+            class="btn btn-lg btn-outline-dark col-md-4"
+            formaction="{{ url_for('FGraph') }}"
+          />
+          <input
+            type="submit"
+            value="Precision"
+            class="btn btn-lg btn-outline-dark col-md-4"
+            formaction="{{ url_for('precisionGraph') }}"
+          />
         </div>
-        <br>
-        <h3>Predict tag:</h3>
-        <div class ="row ">
-          <input type="text" placeholder="Enter Title and Body" name="titlebody" id="titlebody" class="form-control col-md-offset-3">
+        <br />
+        <h3 class="text-center">Click for predicting</h3>
+        <div class="flex">
+          <input
+            type="submit"
+            value="Make Prediction"
+            class="btn btn-lg btn-outline-dark col-md-4"
+            formaction="{{ url_for('question') }}"
+          />
         </div>
-        <br>
-        <div class="row">
-          <div class="col text-center">
-          <input type="submit" value="Predict" class="btn btn-lg btn-outline-dark col-md-4" formaction="{{ url_for('predict') }}"/>
-            </div>
-        </div>
+        <br />
       </form>
     </div>
-        <center>
-<h1>{{var}}</h1>
-</center>
-  <script src="{{ url_for('static',filename ='/index.js') }}"></script>
+    <center>
+      <h1>{{var}}</h1>
+    </center>
+    <script src="{{ url_for('static',filename ='/index.js') }}"></script>
   </body>
-
 </html>

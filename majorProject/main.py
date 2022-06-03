@@ -51,10 +51,13 @@ app=Flask(__name__)
 def home():
     return render_template("Userpage.html")
 
+@app.route("/question",methods=["GET","POST"])
+def question():
+    return render_template("Question.html")
+
 @app.route("/titleModule",methods=["GET","POST"])
 def titleModule():
     global cls
-    global cv
     global title_precision
     global title_recall
     global title_f1
@@ -174,7 +177,8 @@ def bodyAndTitleModule():
     global hand_precision
     global hand_recall
     global hand_f1
-
+    global cv
+    global cls
     train = pd.read_csv('dataset.csv', encoding='iso-8859-1', nrows=50000)
     X = []
     Y = []
@@ -278,8 +282,11 @@ def predict():
                     if predict[i] == 1:
                         finaltags.append(tag_names[i])
                 print(predict)
-                finaltags="Tags identified as: "+finaltags[0];
-            return render_template("userpage.html", var=finaltags)
+                if(len(finaltags)==0):
+                    finaltags = "Tags identified as: " + none;
+                else:
+                    finaltags="Tags identified as: "+finaltags[0];
+            return render_template("Question.html", var=finaltags)
 
 if __name__ == "__main__":
     app.run(port=9000,debug=True)
