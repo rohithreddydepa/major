@@ -234,7 +234,7 @@ def bodyAndTitleModule():
 @app.route("/recallGraph",methods=["GET","POST"])
 def recallGraph():
     height = [title_recall,body_recall,hand_recall]
-    bars = ('Title Recall','Body Recall','Hand-Engineered Recall')
+    bars = ('Title Recall','Body Recall','Body and Title Recall')
     y_pos = np.arange(len(bars))
     plt.bar(y_pos, height)
     plt.xticks(y_pos, bars)
@@ -245,7 +245,7 @@ def recallGraph():
 @app.route("/FGraph",methods=["GET","POST"])
 def FGraph():
     height = [title_f1,body_f1,hand_f1]
-    bars = ('Title F1','Body F1','Hand-Engineered F1')
+    bars = ('Title F1','Body F1','Body and Title F1')
     y_pos = np.arange(len(bars))
     plt.bar(y_pos, height)
     plt.xticks(y_pos, bars)
@@ -256,7 +256,7 @@ def FGraph():
 @app.route("/precisionGraph",methods=["GET","POST"])
 def precisionGraph():
     height = [title_precision,body_precision,hand_precision]
-    bars = ('Title Precision','Body Precision','Hand-Engineered Precision')
+    bars = ('Title Precision','Body Precision','Body and Title Precision')
     y_pos = np.arange(len(bars))
     plt.bar(y_pos, height)
     plt.xticks(y_pos, bars)
@@ -283,7 +283,7 @@ def predict():
                         finaltags.append(tag_names[i])
                 print(predict)
                 if(len(finaltags)==0):
-                    finaltags = "Tags identified as: " + none;
+                    finaltags = "Tags identified as: " + "none";
                 else:
                     finaltags="Tags identified as: "+finaltags[0];
             return render_template("Question.html", var=finaltags)
