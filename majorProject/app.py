@@ -27,7 +27,6 @@ def predict():
     line = args.get('data')
     line = line.strip('\n')
     line = line.strip()
-    temp = line
     line = line.lower()
     if len(line) > 0:
         cv1 = CountVectorizer(vocabulary=TitleBody.cv.get_feature_names(), stop_words="english", lowercase=True,
@@ -40,7 +39,7 @@ def predict():
                 finaltags.append(Title.tag_names[i])
 
         finaltags = finaltags[0];
-    return finaltags
+    return jsonify(finaltags)
 @app.route("/graphs",methods=["GET","POST"])
 def graphs():
     data={}
@@ -52,15 +51,15 @@ def graphs():
     if model == 'F1':
         tmp['label']='F1 Graph';
         tmp['backgroundColor']='#42A5F5';
-        tmp['data']=[titleData.get('F1'),bodyData.get('F1'),titleBodyData.get('F1')];
+        tmp['data']=[titleData.get('values')[2],bodyData.get('values')[2],titleBodyData.get('values')[2]];
     elif model == 'Precision':
         tmp['label']='Precision Graph';
         tmp['backgroundColor']='#FFE0B2';
-        tmp['data']=[titleData.get('Precision'),bodyData.get('Precision'),titleBodyData.get('Precision')];
+        tmp['data']=[titleData.get('values')[0],bodyData.get('values')[0],titleBodyData.get('values')[0]];
     elif model == "Recall":
         tmp['label'] = 'Recall Graph';
         tmp['backgroundColor'] = '#42A5F5';
-        tmp['data'] = [titleData.get('Recall'), bodyData.get('Recall'), titleBodyData.get('Recall')];
+        tmp['data'] = [titleData.get('values')[1], bodyData.get('values')[1], titleBodyData.get('values')[1]];
     data['datasets'].append(tmp);
 
     return jsonify(data)
