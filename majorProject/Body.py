@@ -104,6 +104,5 @@ def bodyModule():
     body_f1 = f1_score(y_test, y_pred, average='micro') * 100
     acc2 = accuracy_score(y_test, y_pred) * 100
     hl2 = hamming_loss(y_test, y_pred)
-
-    return {'Precision': body_precision, 'Recall': body_recall,'F1': body_f1, 'Accuracy': acc2, 'HL': hl2}
+    return { 'labels':['Precision','Recall','F1','Accuracy','HL'],'values':[body_precision,body_recall,body_f1,acc2,hl2]}
 

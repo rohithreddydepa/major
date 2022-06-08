@@ -100,5 +100,5 @@ def titleModule():
     acc1 = accuracy_score(y_test, y_pred) * 100
     hl1= hamming_loss(y_test, y_pred)
 
-    return { 'Precision': title_precision, 'Recall': title_recall,'F1': title_f1, 'Accuracy': acc1, 'HL': hl1}
+    return { 'labels':['Precision','Recall','F1','Accuracy','HL'],'values':[title_precision,title_recall,title_f1,acc1,hl1]}
 

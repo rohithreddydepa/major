@@ -106,8 +106,8 @@ def bodyAndTitleModule():
     hand_f1 = f1_score(y_test, y_pred, average='micro') * 100
     acc3 = accuracy_score(y_test, y_pred) * 100
     hl3 = hamming_loss(y_test, y_pred)
-
-    return {'Precision': hand_precision, 'Recall': hand_recall,'F1': hand_f1, 'Accuracy': acc3, 'HL': hl3}
+    return {'labels': ['Precision', 'Recall', 'F1', 'Accuracy', 'HL'],
+            'values': [hand_precision, hand_recall, hand_f1, acc3, hl3]}
 
 
 
