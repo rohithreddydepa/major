@@ -1,4 +1,3 @@
-
 from flask import Flask, request, jsonify
 from sklearn.feature_extraction.text import CountVectorizer
 import Title ,TitleBody ,Body
@@ -67,4 +66,4 @@ def graphs():
 
     return jsonify(data)
 if __name__ == "__main__":
-    app.run(port=9000, debug=True)
+    app.run()
