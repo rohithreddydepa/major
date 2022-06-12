@@ -7,6 +7,9 @@ app = Flask(__name__)
 titleData=Title.titleModule()
 bodyData=Body.bodyModule()
 titleBodyData=TitleBody.bodyAndTitleModule()
+@app.route('/')
+def index():
+  return jsonify('Working')
 @app.route("/metrics", methods=["GET", "POST"])
 def home():
     args = request.args
