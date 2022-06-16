@@ -4,12 +4,23 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+click = "*"
 flask = "*"
+itsdangerous = "*"
+jinja2 = "*"
+joblib = "*"
+markupsafe = "*"
+nltk = "*"
 numpy = "*"
 pandas = "*"
+python-dateutil = "*"
+pytz = "*"
 scikit-learn = "*"
-nltk = "*"
+scipy = "*"
+six = "*"
+werkzeug = "*"
 gunicorn = "*"
+sklearn = "*"
 
 [dev-packages]
 
