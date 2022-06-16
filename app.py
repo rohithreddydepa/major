@@ -1,12 +1,15 @@
 import json
-from flask import Flask, request, jsonify
+from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
 data=json.load(open('data.json'))
-@app.route('/')
-def index():
-  return jsonify('Home url is Working')
-@app.route("/metrics", methods=["GET", "POST"])
+@app.route('/', methods=['GET'])
+def root():
+    return render_template('index.html')
+@app.errorhandler(404)
+def not_found(e):
+    return render_template("index.html")
+@app.route("/metric", methods=["GET", "POST"])
 def metrics():
     args = request.args
     model=args.get('model')
@@ -15,7 +18,7 @@ def metrics():
     else:
         res={'error':'Wrong Parameter'}
     return jsonify(res)
-@app.route("/predict",methods=["GET","POST"])
+@app.route("/predictTag",methods=["GET","POST"])
 def predict():
     # finaltags = []
     # args = request.args
@@ -36,7 +39,7 @@ def predict():
     #     finaltags = finaltags[0];
     # return jsonify(finaltags)
     return jsonify('predict is under develpment')
-@app.route("/graphs",methods=["GET","POST"])
+@app.route("/graph",methods=["GET","POST"])
 def graphs():
     args = request.args
     model = args.get('type')
