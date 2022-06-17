@@ -70,15 +70,15 @@ def predict():
 def graphs():
     args = request.args
     model = args.get('type')
-    final={}
     res={}
-    final['labels']=['Title','Body','TitleBody']
-    final['datasets']=[]
-    res['label']=model+" Graph"
-    res['backgroundColor']='#FFE0B2' if(model=='Precision') else '#42A5F5'
     idx=data.get('labels').index(model)
     res['data'] = [data.get('Title')[idx], data.get('Body')[idx], data.get('TitleBody')[idx]];
-    final['datasets'].append(res);
-    return jsonify(final)
+    return jsonify(res)
+@app.route("/preprocessing",methods=["GET","POST"])
+def analysis():
+    res={}
+    res=data.get('count')
+    return jsonify(res)
+
 if __name__ == "__main__":
     app.run()
